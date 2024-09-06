@@ -1,25 +1,25 @@
 #include <Arduino.h>
 
 // Definitions!
-#define Line_B 22
-#define Line_F 9
-#define Dist_F 5
-#define Dist_B 10 
-#define Dist_L 11
-#define Dist_R 8
-#define MotorDriver_L1 12
-#define MotorDriver_L2 13
-#define MotorDriver_R1 24
-#define MotorDriver_R2 23
-#define StartModule 21
+#define Line_B 17
+#define Line_F 6
+#define Dist_L 8
+#define Dist_FL 7 
+#define Dist_FR 2
+#define Dist_R 5
+#define MotorDriver_L1 9
+#define MotorDriver_L2 10
+#define MotorDriver_R1 18
+#define MotorDriver_R2 19
+#define StartModule 16
 
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
 pinMode(Line_B, INPUT);
 pinMode(Line_F, INPUT);
-pinMode(Dist_F, INPUT);
-pinMode(Dist_B, INPUT);
+pinMode(Dist_FR, INPUT);
+pinMode(Dist_FL, INPUT);
 pinMode(Dist_L, INPUT);
 pinMode(Dist_R, INPUT);
 pinMode(MotorDriver_L1, OUTPUT);
@@ -31,7 +31,10 @@ pinMode(StartModule, INPUT);
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(digitalRead(Dist_L));
+digitalWrite(MotorDriver_L2,1);
+digitalWrite(MotorDriver_L1,0);
+//Serial.println("HI Kyle :3");
+//delay(5000);
 } // loop
 
 // Movement functions!
@@ -79,3 +82,28 @@ void hoe_stop() {
   digitalWrite(MotorDriver_R1, 1);
   digitalWrite(MotorDriver_R2, 1);
 } // hoe_stop
+
+/*
+Ojousama
+It's time to go to bed
+Tto haendeupon haneun geoyeyo
+Neutge jamyeon
+Goun pibu ga da muneojinda guyo
+Saigo no keikoku desu
+Jigeum jame deulji anmyeon
+Urin chum eul chul geoyeyo
+Yare, yare
+Mot malrineun agassi
+Yare, yare
+Mot malrineun agassi
+Yare, yare
+Mot malrineun agassi
+Tto-tto-tto-tto-tto-tto-tto
+Tto haendeupon haneun geoyeyo
+Ti-ti-ti-ti-ti-ti
+Time to go to bed
+Go, go, go, go, go, go
+Goun pibu ga da muneojinda guyo
+Ya-ya-ya-ya-ya-ya
+Yare yare, mot malrineun agassi
+*/
