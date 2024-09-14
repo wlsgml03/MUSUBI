@@ -12,11 +12,14 @@
 #define MotorDriver_R1 18
 #define MotorDriver_R2 19
 #define StartModule 16
+void hoe_move_forward();
+unsigned long startTime = 0;
+unsigned long runTime = 0;
 
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
-pinMode(Line_B, INPUT);
+pinMode(Line_B, OUTPUT);
 pinMode(Line_F, INPUT);
 pinMode(Dist_FR, INPUT);
 pinMode(Dist_FL, INPUT);
@@ -30,9 +33,12 @@ pinMode(StartModule, INPUT);
 } // setup
 
 void loop() {
-  // put your main code here, to run repeatedly:
-digitalWrite(MotorDriver_L2,1);
-digitalWrite(MotorDriver_L1,0);
+if (digitalRead(StartModule) == 1) {
+  hoe_move_forward();
+} else if (digitalRead(StartModule) == 0) {
+  hoe_stop();
+}
+// r1 useless
 //Serial.println("HI Kyle :3");
 //delay(5000);
 } // loop
@@ -45,34 +51,34 @@ digitalWrite(MotorDriver_L1,0);
 // This is ignoring rotation. I (Kyle) will wire it so these combinations actually work like the guide above says.
 void hoe_to_the_left() {
   // turn left
-  digitalWrite(MotorDriver_L1, 0);
-  digitalWrite(MotorDriver_L2, 1);
+  digitalWrite(MotorDriver_L1, 1);
+  digitalWrite(MotorDriver_L2, 0);
   digitalWrite(MotorDriver_R1, 1);
   digitalWrite(MotorDriver_R2, 0);
 } // hoe_to_the_left
 
 void hoe_to_the_right() {
   // turn right
-  digitalWrite(MotorDriver_L1, 1);
-  digitalWrite(MotorDriver_L2, 0);
+  digitalWrite(MotorDriver_L1, 0);
+  digitalWrite(MotorDriver_L2, 1);
   digitalWrite(MotorDriver_R1, 0);
   digitalWrite(MotorDriver_R2, 1);
 } // hoe_to_the_right
 
 void hoe_move_forward() {
   // move forward
-  digitalWrite(MotorDriver_L1, 0);
-  digitalWrite(MotorDriver_L2, 1);
-  digitalWrite(MotorDriver_R1, 0);
-  digitalWrite(MotorDriver_R2, 1);
+  digitalWrite(MotorDriver_R1,0);
+  digitalWrite(MotorDriver_R2,1);
+  digitalWrite(MotorDriver_L2,1);
+  digitalWrite(MotorDriver_L1,0);
 } // hoe_move_forward
 
 void hoe_move_backwards() {
   // move backwards
-  digitalWrite(MotorDriver_L1, 1);
-  digitalWrite(MotorDriver_L2, 0);
-  digitalWrite(MotorDriver_R1, 1);
-  digitalWrite(MotorDriver_R2, 0);
+  digitalWrite(MotorDriver_R1,1);
+  digitalWrite(MotorDriver_R2,0);
+  digitalWrite(MotorDriver_L2,0);
+  digitalWrite(MotorDriver_L1,1);
 } // hoe_move_backwards
 
 void hoe_stop() {
