@@ -12,6 +12,8 @@
 #define MotorDriver_R1 18
 #define MotorDriver_R2 19
 #define StartModule 16
+int leftLine;
+int rightLine;
 void hoe_move_forward();
 unsigned long startTime = 0;
 unsigned long runTime = 0;
@@ -33,11 +35,19 @@ pinMode(StartModule, INPUT);
 } // setup
 
 void loop() {
-if (digitalRead(StartModule) == 1) {
-  hoe_move_forward();
-} else if (digitalRead(StartModule) == 0) {
-  hoe_stop();
-}
+  leftLine= digitalRead(Line_F);
+  rightLine= digitalRead(Line_B);
+// if (digitalRead(StartModule) == 1) {
+//   hoe_move_forward();
+// } else if (digitalRead(StartModule) == 0) {
+//   hoe_stop();
+// }
+Serial.println("Left Line sensor reads:");
+Serial.println(leftLine);
+Serial.println("Right Line sensor reads:");
+Serial.println(rightLine);
+delay(5000);
+
 // r1 useless
 //Serial.println("HI Kyle :3");
 //delay(5000);
